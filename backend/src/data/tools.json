@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "HTML5", "description": "Markup Language", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+  { "id": 2, "name": "CSS3", "description": "Styling Language", "url": "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { "id": 3, "name": "JavaScript", "description": "Programming Language", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+  { "id": 4, "name": "TypeScript", "description": "Typed JavaScript", "url": "https://www.typescriptlang.org" },
+  { "id": 5, "name": "React", "description": "UI Library", "url": "https://react.dev" },
+  { "id": 6, "name": "Next.js", "description": "React Framework", "url": "https://nextjs.org" },
+  { "id": 7, "name": "Git", "description": "Version Control", "url": "https://git-scm.com" },
+  { "id": 8, "name": "Tailwind CSS", "description": "Utility CSS Framework", "url": "https://tailwindcss.com" },
+  { "id": 9, "name": "TanStack Query", "description": "Data Fetching Library", "url": "https://tanstack.com/query" },
+  { "id": 10, "name": "Node.js", "description": "JavaScript Runtime", "url": "https://nodejs.org" }
+]

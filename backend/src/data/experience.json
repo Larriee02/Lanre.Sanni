@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Freelance Software Engineer",
+    "description": "Built multiple websites for clients, including e-commerce platforms, portfolio sites, and business websites. Worked closely with clients to understand requirements and delivered customized solutions using modern web technologies.",
+    "date": "Jan 2024 - Present"
+  },
+  {
+    "id": 2,
+    "name": "Motorola Solutions",
+    "description": "Internship as a Database Administrator, responsible for managing and optimizing databases, ensuring data integrity, and supporting the development team with database-related tasks.",
+    "date": "Jan 2025 - Dec 2025"
+  },
+  {
+    "id": 3,
+    "name": "Emstill Solutions",
+    "description": "Worked as a Software Engineer at a FinTech company during a university internship, developing and maintaining software applications supporting financial services.",
+    "date": "Jun 2023 - Dec 2023"
+  }
+]

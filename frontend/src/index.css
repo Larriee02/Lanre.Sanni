@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+    /* fonts */
+    --font-display: "Plus Jakarta Sans", ui-sans-serif, sans-serif;
+    --font-sans: "Inter", ui-sans-serif, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+    /* warm dark mode surfaces (kept warm/neutral so the blue accent pops) */
+    --color-ink: #14120f;
+    --color-ink-card: #1f1c18;
+    --color-ink-card-hover: #29251f;
+    --color-ink-input: #262119;
+    --color-ghost: #202b45;
+
+    /* warm light mode surfaces */
+    --color-paper: #f7f4ef;
+    --color-paper-card: #ffffff;
+    --color-paper-muted: #ece8e0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+}

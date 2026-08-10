@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Full-stack portfolio — React/Tailwind/Framer Motion frontend + Node.js/Express ESM backend.",
+  "scripts": {
+    "install:all": "npm install --prefix frontend && npm install --prefix backend",
+    "dev": "npm run install:all --silent && concurrently -n backend,frontend -c blue,green \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "start:backend": "npm run start --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Sneakers Store",
+    "description": "E-commerce Sneaker Store",
+    "image": "/images/sneakers.png",
+    "link": "https://bxxjay.github.io/VORTEX/"
+  },
+  {
+    "id": 2,
+    "name": "Hairstylist Studio",
+    "description": "Hairstylist Booking Platform",
+    "image": "/images/bnm.png",
+    "link": "https://bxxjay.github.io/REACT.JS/"
+  },
+  {
+    "id": 3,
+    "name": "Restaurant Website",
+    "description": "Restaurant Bookings & Menu",
+    "image": "/images/rest.png",
+    "link": "https://el-dulce-wheat.vercel.app/"
+  }
+]
