@@ -25,7 +25,7 @@ export default function About({ darkMode }) {
                     <p className={`text-sm sm:text-base leading-relaxed max-w-lg ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
                         <p>I got into development the way a lot of people do, curiosity turned into obsession. </p>
                         <p>What kept me here is the craft: taking an idea, a business problem, or a rough proposal document and turning it into something real people can click through, trust, and use. </p>
-                        <p>I recently completed TechCrush's Backend Development program (Node.js/Express track), sharpening my backend fundamentals, and I've carried that into a portfolio of full-stack projects that mirror real-world problems, from fintech dashboards to healthcare booking systems to logistics platforms for local businesses here in Lagos.</p>
+                        <p>I recently completed TechCrush's Backend Development program (Node.js/Express track), sharpening my backend fundamentals, and I've carried that into a portfolio of full stack projects that mirror real world problems, from fintech dashboards to healthcare booking systems to logistics platforms for local businesses here in Lagos.</p>
                     </p>
 
                     <p className={`text-sm sm:text-base leading-relaxed max-w-lg ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
@@ -36,7 +36,7 @@ export default function About({ darkMode }) {
                         <li><span style={{ fontWeight: "bold" }}>Deployment:</span> GitHub Pages, Render, Vercel. </li>
                         </ul>
                         <p>I've built and shipped projects like a dispatch and landing platform for a Lagos based towing service, a fintech dashboard with real time analytics, an apartment rental platform for World Cup visitors, and a healthcare booking system each one an exercise in solving a real problem, not just checking a technical box.</p>
-                            When I'm not coding, I'm usually thinking about how tech can solve very specific, very local problems, the kind that don't show up in generic SaaS templates but matter a lot to the people dealing with them.
+                            When I'm not writing codes, I'm usually thinking about how tech can solve very specific, very local problems, the kind that don't show up in generic SaaS templates but matter a lot to the people dealing with them.
                     </p>
 
                     <p className={`text-sm sm:text-base leading-relaxed max-w-lg ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
