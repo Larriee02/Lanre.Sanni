@@ -1,7 +1,7 @@
 ---
 title: "Error Handling Patterns That Don't Crash Your API"
 date: "2026-09-02"
-excerpt: "A well-built API doesn't just work when things go right. It fails gracefully, tells the client what went wrong, and keeps the server running when unexpected errors occur."
+excerpt: "A well built API doesn't just work when things go right. It fails gracefully, tells the client what went wrong, and keeps the server running when unexpected errors occur."
 ---
 
 ## The stakes are real
