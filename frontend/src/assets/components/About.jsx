@@ -35,7 +35,7 @@ export default function About({ darkMode }) {
                         <li><span style={{ fontWeight: "bold" }}>Databases:</span> MongoDB and PostgreSQL, depending on what the project actually needs</li>
                         <li><span style={{ fontWeight: "bold" }}>Deployment:</span> GitHub Pages, Render, Vercel. </li>
                         </ul>
-                        <p>I've built and shipped projects like a dispatch and landing platform for a Lagos based towing service, a fintech dashboard with real time analytics, an apartment rental platform for World Cup visitors, and a healthcare booking system each one an exercise in solving a real problem, not just checking a technical box.</p>
+                        <p>I've built and shipped projects like a dispatch and landing page platform for a Lagos based towing service, a fintech dashboard with real time analytics, an apartment rental platform for World Cup visitors, and a healthcare booking system each one an exercise in solving a real problem, not just checking a technical box.</p>
                             When I'm not writing codes, I'm usually thinking about how tech can solve very specific, very local problems, the kind that don't show up in generic SaaS templates but matter a lot to the people dealing with them.
                     </p>
 
