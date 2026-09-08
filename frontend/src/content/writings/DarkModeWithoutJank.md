@@ -8,7 +8,7 @@ excerpt: "Dark mode is expected on modern websites, but it is easy to implement 
 
 I added dark mode to my portfolio using `localStorage` and state management, but users would see a flash of light colors before dark mode kicked in on page reload. It looked unpolished, and fixing it required rethinking when to read and apply the theme.
 
-The issue is timing. By default, React loads, initializes state, and renders — all after the page has already painted. In those milliseconds, the browser renders with default styles, then dark mode suddenly applies. That flash breaks the experience.
+The issue is timing. By default, React loads, initializes state, and renders all after the page has already painted. In those milliseconds, the browser renders with default styles, then dark mode suddenly applies. That flash breaks the experience.
 
 ## The solution: read the theme before rendering
 
@@ -150,4 +150,4 @@ A well-implemented dark mode is:
 - **Smooth**: Transitions feel intentional
 - **Maintainable**: Centralized theme values, not scattered classNames
 
-That is what separates a hastily-added dark mode from a polished feature. The implementation details matter, and they show in the user experience.
+That is what separates a hastily added dark mode from a polished feature. The implementation details matter, and they show in the user experience.
