@@ -25,7 +25,7 @@ export default function About({ darkMode }) {
                     <p className={`text-sm sm:text-base leading-relaxed max-w-lg ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
                         <p>I got into development the way a lot of people do, curiosity turned into obsession. </p>
                         <p>What kept me here is the craft: taking an idea, a business problem, or a rough proposal document and turning it into something real people can click through, trust, and use. </p>
-                        <p>I'm currently sharpening my backend fundamentals through TechCrush's Backend Development program (Node.js/Express track), while building out a portfolio of full stack projects that mirror real world problems, from fintech dashboards to healthcare booking systems to logistics platforms for local businesses here in Lagos. </p>
+                        <p>I recently completed TechCrush's Backend Development program (Node.js/Express track), sharpening my backend fundamentals, and I've carried that into a portfolio of full-stack projects that mirror real-world problems, from fintech dashboards to healthcare booking systems to logistics platforms for local businesses here in Lagos.</p>
                     </p>
 
                     <p className={`text-sm sm:text-base leading-relaxed max-w-lg ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
