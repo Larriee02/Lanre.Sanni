@@ -1,12 +1,12 @@
 ---
 title: "Performance: The Invisible Feature Nobody Tracks"
 date: "2026-09-08"
-excerpt: "A fast website is not a feature — it is the baseline. But most portfolios ship without even checking how fast they really are. Here is how to make performance part of your development workflow."
+excerpt: "A fast website is not a feature, it is the baseline. But most portfolios ship without even checking how fast they really are. Here is how to make performance part of your development workflow."
 ---
 
 ## Why performance is invisible
 
-When something works fast, nobody notices. When it is slow, everybody does. This is why performance is easy to ignore — it does not feel like a feature you are building, it feels like something that should just happen.
+When something works fast, nobody notices. When it is slow, everybody does. This is why performance is easy to ignore it does not feel like a feature you are building, it feels like something that should just happen.
 
 But performance is a choice. A choice between shipping code as soon as it compiles, or taking the time to measure it, optimize it, and keep it optimized.
 
@@ -127,7 +127,7 @@ Now, the second time a user visits the projects page, it loads instantly from me
 
 ## Images: resize them before shipping
 
-A full-resolution photo for a project card does not need to be 4MB. Use an image optimizer:
+A full resolution photo for a project card does not need to be 4MB. Use an image optimizer:
 
 ```bash
 npm install --save-dev imagemin imagemin-mozjpeg
