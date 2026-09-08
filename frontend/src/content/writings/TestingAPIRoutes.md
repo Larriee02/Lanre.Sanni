@@ -231,7 +231,7 @@ Now if tests fail, you cannot commit. This prevents broken code from reaching pr
 
 ## The coverage question
 
-Aim for 80% test coverage, not 100%. Some code (like UI rendering) is hard to test and low-risk. Focus on:
+Aim for 80% test coverage, not 100%. Some code (like UI rendering) is hard to test and low risk. Focus on:
 
 - API routes
 - Validation logic
