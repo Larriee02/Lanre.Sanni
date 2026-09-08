@@ -1,14 +1,14 @@
 ---
 title: "Writing Code That's Easy to Delete"
 date: "2026-09-06"
-excerpt: "The best code is not just good — it is expendable. When you can delete a component without breaking ten other things, that is when you know your architecture is sound."
+excerpt: "The best code is not just good, it is expendable. When you can delete a component without breaking ten other things, that is when you know your architecture is sound."
 ---
 
 ## The lesson from production
 
-I learned this the hard way. I built a feature for my portfolio that seemed like a great idea at the time, but after three months, it was clear it did not fit the design. The problem was not removing the feature — it was that removing it required touching code in five different places.
+I learned this the hard way. I built a feature for my portfolio that seemed like a great idea at the time, but after three months, it was clear it did not fit the design. The problem was not removing the feature, it was that removing it required touching code in five different places.
 
-The component had too many dependencies, too many props being drilled through child components, and too many side effects tied to its lifecycle. It was not designed to be temporary; it was designed to be permanent and central.
+The component had too many dependencies, too many props being drilled through child components, and too many side effects tied to its lifecycle. It was not designed to be temporary, it was designed to be permanent and central.
 
 That is the wrong approach. The best code is written with deletion in mind.
 
@@ -89,7 +89,7 @@ export default function ProjectCard({ projectId, onProjectDeleted }) {
 }
 ```
 
-Now if you need to delete the project card, you only need to understand what it does — not how five different concerns are tangled together.
+Now if you need to delete the project card, you only need to understand what it does, not how five different concerns are tangled together.
 
 ## Prop contracts make deletion safe
 
@@ -114,11 +114,11 @@ function ProjectCard({
 }
 ```
 
-Explicit props are self-documenting. They tell future you (and other developers) what the component depends on.
+Explicit props are self documenting. They tell future you (and other developers) what the component depends on.
 
 ## Avoid prop drilling by using composition
 
-Prop drilling — passing props through multiple layers of components just to get them to a leaf component — creates hidden dependencies:
+Prop drilling passing props through multiple layers of components just to get them to a leaf component creates hidden dependencies:
 
 ```jsx
 // Bad: deeply nested prop drilling
@@ -193,6 +193,6 @@ When you build this way, you can delete a feature in an afternoon without fear o
 
 ## The real benefit
 
-The funny thing is that code written to be deletable is also easier to understand, easier to test, and easier to extend. You are not sacrificing anything by following these principles — you are gaining clarity.
+The funny thing is that code written to be deletable is also easier to understand, easier to test, and easier to extend. You are not sacrificing anything by following these principles, you are gaining clarity.
 
 The best code is code that does not have to exist forever.
