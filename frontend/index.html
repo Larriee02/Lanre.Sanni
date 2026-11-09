@@ -3,15 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Welcome to Lanre Sanni's portfolio website, showcasing a diverse range of projects and skills in web development, design, and more. Explore my work and experience in the tech industry." />
+    <title>Lanre Sanni — Full Stack Developer</title>
+    <meta
+      name="description"
+      content="Hi, I'm Lanre Sanni, a Full Stack Developer based in Lagos, Nigeria, building clean interfaces, solid backends, and the small details that make a product feel human."
+    />
     <meta name="author" content="Lanre Sanni" />
-    <link rel="icon" type="image/png" href="/images/favicon.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/images/favicon.png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="/images/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <title>Lanre Sanni Portfolio Website</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lanre Sanni — Full Stack Developer" />
+    <meta
+      property="og:description"
+      content="Full Stack Developer based in Lagos, Nigeria. React, Node.js/Express, Tailwind CSS, MongoDB & PostgreSQL."
+    />
+    <meta property="og:image" content="/images/logos/ls-full-dark.png" />
+    <meta name="theme-color" content="#FFFFFF" id="theme-color-meta" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/images/logos/ls-badge-light.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Red+Hat+Display:wght@400;500;700&family=Sora:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = saved ? saved === 'dark' : prefersDark;
+          var root = document.documentElement;
+          root.classList.toggle('dark', isDark);
+          root.style.colorScheme = isDark ? 'dark' : 'light';
+          var meta = document.getElementById('theme-color-meta');
+          if (meta) meta.setAttribute('content', isDark ? '#000000' : '#FFFFFF');
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

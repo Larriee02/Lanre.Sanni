@@ -1,17 +1,18 @@
 {
-  "name": "portfolio-monorepo",
+  "name": "lanre-portfolio",
   "private": true,
   "version": "1.0.0",
-  "description": "Full-stack portfolio — React/Tailwind/Framer Motion frontend + Node.js/Express ESM backend.",
+  "description": "Lanre Sanni portfolio — React + Tailwind CSS frontend, Node.js/Express contact API.",
   "scripts": {
-    "install:all": "npm install --prefix frontend && npm install --prefix backend",
-    "dev": "npm run install:all --silent && concurrently -n backend,frontend -c blue,green \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "install:all": "npm install && npm install --prefix frontend && npm install --prefix backend",
+    "dev": "concurrently -n backend,frontend -c cyan,yellow \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
     "dev:backend": "npm run dev --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
     "build": "npm run build --prefix frontend",
-    "start:backend": "npm run start --prefix backend"
+    "start": "npm start --prefix backend",
+    "start:backend": "npm start --prefix backend"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.2.1"
   }
 }

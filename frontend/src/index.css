@@ -1,27 +1,144 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
-@theme {
-    /* fonts */
-    --font-display: "Plus Jakarta Sans", ui-sans-serif, sans-serif;
-    --font-sans: "Inter", ui-sans-serif, sans-serif;
-    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+@custom-variant dark (&:where(.dark, .dark *));
 
-    /* warm dark mode surfaces (kept warm/neutral so the blue accent pops) */
-    --color-ink: #14120f;
-    --color-ink-card: #1f1c18;
-    --color-ink-card-hover: #29251f;
-    --color-ink-input: #262119;
-    --color-ghost: #202b45;
-
-    /* warm light mode surfaces */
-    --color-paper: #f7f4ef;
-    --color-paper-card: #ffffff;
-    --color-paper-muted: #ece8e0;
+/*
+ * Palette engineered directly from the Lanre Sanni (LS) logo pack:
+ * - Light mode canvas: #FFFFFF (matches IMG_4573 & IMG_4575 white background)
+ * - Dark mode canvas:  #000000 (matches IMG_4574 & IMG_4576 black background)
+ * - Brand Blues:       #0D51EF (primary ribbon blue) -> #0637B6 (deep ribbon fold)
+ */
+:root {
+  --canvas: #ffffff;
+  --ink: #080c14;
+  --ink-soft: #364152;
+  --muted: #647084;
+  --subtle: #475266;
+  --card: #f2f6fd;
+  --surface: #f5f8ff;
+  --line: #64748b;
+  --cta: #0d51ef;
+  --cta-text: #ffffff;
+  --cta-hover: #0637b6;
+  --cta-hover-text: #ffffff;
+  --accent: #0d51ef;
+  --accent-deep: #0637b6;
+  color-scheme: light;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: var(--font-sans);
+:root.dark {
+  --canvas: #000000;
+  --ink: #f8fafc;
+  --ink-soft: #b8c4d9;
+  --muted: #7f8ea8;
+  --subtle: #99a8c2;
+  --card: #070d19;
+  --surface: #080e1c;
+  --line: #3b4c6b;
+  --cta: #0d51ef;
+  --cta-text: #ffffff;
+  --cta-hover: #2d6df6;
+  --cta-hover-text: #ffffff;
+  --accent: #2d6df6;
+  --accent-deep: #0d51ef;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-card: var(--card);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-cta: var(--cta);
+  --color-accent: var(--accent);
+
+  --font-display: 'Red Hat Display', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-label: 'Sora', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--canvas);
+    color: var(--ink);
+  }
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+  }
+  ::selection {
+    background-color: #0d51ef;
+    color: #ffffff;
+  }
+}
+
+/* Silky-smooth theme + logo switch transition applied when toggling */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow, opacity !important;
+  transition-duration: 450ms !important;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+@layer components {
+  /* Page gutter: mirrors the 126px site margin on wide screens. */
+  .shell {
+    @apply mx-auto w-full max-w-[1440px] px-6 sm:px-10 lg:px-[126px];
+  }
+
+  .link-underline {
+    background-image: linear-gradient(90deg, var(--accent), var(--accent-deep));
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s ease;
+  }
+  .group:hover .link-underline,
+  .link-underline:hover {
+    background-size: 100% 2px;
+  }
+
+  .btn-primary {
+    background-image: linear-gradient(135deg, #0d51ef 0%, #0637b6 100%);
+    color: #ffffff;
+    box-shadow: 0 10px 24px -8px rgba(13, 81, 239, 0.55);
+    @apply inline-flex items-center rounded-full px-6 py-3 font-sans text-sm font-bold transition-all duration-200 hover:-translate-y-0.5;
+  }
+  .btn-primary:hover {
+    background-image: linear-gradient(135deg, #2566f5 0%, #0d51ef 100%);
+    box-shadow: 0 14px 28px -8px rgba(13, 81, 239, 0.75);
+  }
+
+  .field {
+    @apply w-full border-0 border-b border-ink/25 bg-transparent px-0 py-3 text-lg font-light text-ink placeholder:text-ink/35 transition-colors focus:border-accent focus:outline-none focus:ring-0;
+  }
+}
+
+/* Scroll reveal — subtle fade-up like the reference site. */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  html.theme-transition,
+  html.theme-transition * {
+    opacity: 1;
+    transform: none;
+    transition: none !important;
+  }
 }
