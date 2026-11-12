@@ -80,7 +80,7 @@ export const intro = [
 export const story = [
   'I got into development the way a lot of people do, curiosity turned into obsession.',
   'What kept me here is the craft: taking an idea, a business problem, or a rough proposal document and turning it into something real people can click through, trust, and use.',
-  "I recently completed TechCrush's Backend Development program (Node.js/Express track), sharpening my backend fundamentals, and I've carried that into a portfolio of full stack projects that mirror real world problems, from fintech dashboards to healthcare booking systems to logistics platforms for local businesses here in Lagos.",
+  "I recently completed a Backend Development program (Node.js/Express track), sharpening my backend fundamentals, and I've carried that into a portfolio of full stack projects that mirror real world problems, from fintech dashboards to healthcare booking systems to logistics platforms for local businesses here in Lagos.",
   "I've built and shipped projects like a dispatch and landing page platform for a Lagos based towing service, a fintech dashboard with real time analytics, an apartment rental platform for World Cup visitors, and a healthcare booking system, each one an exercise in solving a real problem, not just checking a technical box.",
   "When I'm not writing code, I'm usually thinking about how tech can solve very specific, very local problems, the kind that don't show up in generic SaaS templates but matter a lot to the people dealing with them.",
 ];
