@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader.jsx';
 import BrandLogo from '../components/BrandLogo.jsx';
 import { budgets, profile, socials } from '../data/site.js';
 
-const API_URL = import.meta.env.VITE_API_URL || '';
+const API_URL = import.meta.env.DEV ? (import.meta.env.VITE_API_URL || '') : '';
 
 const initial = { firstName: '', lastName: '', phone: '', email: '', budget: '', message: '', company: '' };
 

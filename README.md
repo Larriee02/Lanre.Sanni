@@ -72,10 +72,9 @@ Then open `http://localhost:5000`.
 
 For local development without SMTP, Express saves submissions to `backend/data/messages.jsonl`. To test email delivery, copy `backend/.env.example` to `backend/.env` and fill in your SMTP settings.
 
-Both hosted API options require `SMTP_HOST`, `SMTP_USER`, and `SMTP_PASS`. Set `SMTP_PORT` and `SMTP_SECURE` to match your provider, typically port 465 with implicit TLS or port 587 with STARTTLS. Set `CONTACT_TO` (or `CONTACT_TO_EMAIL`) to choose the recipient and `CONTACT_FROM_EMAIL` to choose the sender. Both addresses default to `SMTP_USER`. Keep the SMTP credentials in the hosting provider's server environment.
+Hosted email delivery requires `SMTP_HOST`, `SMTP_USER`, and `SMTP_PASS`. Set `SMTP_PORT` and `SMTP_SECURE` to match your provider, typically port 465 with implicit TLS or port 587 with STARTTLS. Set `CONTACT_TO` (or `CONTACT_TO_EMAIL`) to choose the recipient and `CONTACT_FROM_EMAIL` to choose the sender. Both addresses default to `SMTP_USER`. Keep the SMTP credentials in the hosting provider's server environment.
 
-- **Vercel.** Use the repository root as the project root and leave `VITE_API_URL` unset to use the included same-origin `/api/contact` function. Add SMTP settings in the Vercel project for the environments that should send mail.
-- **Render.** Deploy the Express service using `render.yaml` and set SMTP settings in Render. For a separately hosted frontend, set its build-time `VITE_API_URL` to the Render service origin and set Render's `CORS_ORIGIN` to the frontend origin. The blueprint defaults to `https://lanre-sanni.vercel.app` and accepts a comma-separated list for additional origins.
+- **Vercel.** Use the repository root or `frontend` as the project root and leave `VITE_API_URL` unset to use the included same-origin `/api/contact` function. Add SMTP settings in the Vercel project for the environments that should send mail.
 - **Single Express server.** Set `NODE_ENV=production` and configure SMTP when hosting the built frontend and API together.
 
 Without SMTP, valid production submissions receive HTTP 503. Express reports the configured delivery mode at `/api/health`.

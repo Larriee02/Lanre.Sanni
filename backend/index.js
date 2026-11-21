@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { sendContact, smtpConfigured, validateContact } from './contact.js';
+import { sendContact, smtpConfigured, validateContact } from '../frontend/server/contact.js';
 import { existsSync } from 'node:fs';
 import { appendFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
