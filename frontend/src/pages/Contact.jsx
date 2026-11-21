@@ -53,9 +53,11 @@ export default function Contact() {
         body: JSON.stringify(values),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
+      if (!res.ok || typeof data?.message !== 'string' || !data.message.trim()) {
+        throw new Error(data?.error || 'Could not confirm delivery. Please try again or use WhatsApp.');
+      }
       setValues(initial);
-      setStatus({ state: 'success', message: data.message || "Thanks! Your message is on its way. I'll get back to you soon." });
+      setStatus({ state: 'success', message: data.message });
     } catch (err) {
       setStatus({
         state: 'error',

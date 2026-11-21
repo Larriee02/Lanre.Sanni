@@ -5,7 +5,7 @@ services:
     region: oregon
     plan: free
     rootDir: backend
-    buildCommand: npm install
+    buildCommand: npm ci
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeploy: true
@@ -15,7 +15,7 @@ services:
       - key: PORT
         value: 10000
       - key: CORS_ORIGIN
-        value: https://your-frontend-domain.onrender.com
+        value: https://lanre-sanni.vercel.app
       - key: SMTP_HOST
         sync: false
       - key: SMTP_PORT
@@ -30,5 +30,3 @@ services:
         sync: false
       - key: CONTACT_FROM_EMAIL
         sync: false
-      - key: ADMIN_KEY
-        generateValue: true

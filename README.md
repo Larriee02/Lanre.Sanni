@@ -3,7 +3,7 @@
 A full-stack rebuild of [Lanre Sanni's portfolio](https://lanre-sanni.vercel.app/) styled after the editorial design of [uxfol.io/4127272f](https://uxfol.io/4127272f).
 
 - **Frontend:** React 19 + Vite + Tailwind CSS v4 + React Router + React Markdown
-- **Backend:** Node.js + Express 5 + Nodemailer (with automatic local JSONL fallback when SMTP isn't configured)
+- **Backend:** Node.js + Express 5 + Nodemailer (with a JSONL inbox for local development)
 
 ---
 
@@ -34,9 +34,10 @@ lanre-portfolio/
 
 ### 1. Development (Frontend + Backend)
 
-From the root `lanre-portfolio/` directory:
+Use Node.js 24 LTS. From the repository root:
 
 ```bash
+npm run install:all
 npm run dev
 ```
 
@@ -48,9 +49,10 @@ npm run dev
 If you want to run or deploy only the static frontend:
 
 ```bash
-cd client
+cd frontend
+npm ci
 npm run dev      # Local dev server
-npm run build    # Production build in client/dist
+npm run build    # Production build in frontend/dist
 ```
 
 ### 3. Production Build (Single Node/Express Server)
@@ -66,19 +68,16 @@ Then open `http://localhost:5000`.
 
 ---
 
-## Configuring Email Delivery (Optional)
+## Contact delivery
 
-By default, contact form submissions are validated, rate-limited, and saved to `server/data/messages.jsonl` so everything works out of the box without credentials.
+For local development without SMTP, Express saves submissions to `backend/data/messages.jsonl`. To test email delivery, copy `backend/.env.example` to `backend/.env` and fill in your SMTP settings.
 
-To also deliver submissions via email (Nodemailer), copy `server/.env.example` to `server/.env` and fill in your SMTP details:
+Both hosted API options require `SMTP_HOST`, `SMTP_USER`, and `SMTP_PASS`. Set `SMTP_PORT` and `SMTP_SECURE` to match your provider, typically port 465 with implicit TLS or port 587 with STARTTLS. Set `CONTACT_TO` (or `CONTACT_TO_EMAIL`) to choose the recipient and `CONTACT_FROM_EMAIL` to choose the sender. Both addresses default to `SMTP_USER`. Keep the SMTP credentials in the hosting provider's server environment.
 
-```env
-PORT=5000
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=465
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
-CONTACT_TO=your-email@gmail.com
-```
+- **Vercel.** Use the repository root as the project root and leave `VITE_API_URL` unset to use the included same-origin `/api/contact` function. Add SMTP settings in the Vercel project for the environments that should send mail.
+- **Render.** Deploy the Express service using `render.yaml` and set SMTP settings in Render. For a separately hosted frontend, set its build-time `VITE_API_URL` to the Render service origin and set Render's `CORS_ORIGIN` to the frontend origin. The blueprint defaults to `https://lanre-sanni.vercel.app` and accepts a comma-separated list for additional origins.
+- **Single Express server.** Set `NODE_ENV=production` and configure SMTP when hosting the built frontend and API together.
 
-You can also set your public email address in `client/src/data/site.js` (`profile.email`) to display it in the footer and contact page alongside WhatsApp (`+234 803 512 0129`).
+Without SMTP, valid production submissions receive HTTP 503. Express reports the configured delivery mode at `/api/health`.
+
+Set `profile.email` in `frontend/src/data/site.js` to display a public contact email.

@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import nodemailer from 'nodemailer';
+import { sendContact, smtpConfigured, validateContact } from './contact.js';
 import { existsSync } from 'node:fs';
 import { appendFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
@@ -29,27 +29,18 @@ app.use(
   }),
 );
 
-/* ---------- Mail transport (optional) ---------- */
-
-const smtpConfigured = Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
-const smtpPort = Number(process.env.SMTP_PORT || 465);
-const smtpSecure =
-  process.env.SMTP_SECURE !== undefined ? process.env.SMTP_SECURE === 'true' : smtpPort === 465;
-
-const transporter = smtpConfigured
-  ? nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: smtpPort,
-      secure: smtpSecure,
-      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-    })
-  : null;
-
 /* ---------- Tiny in-memory rate limiter ---------- */
 
 const WINDOW_MS = 15 * 60 * 1000;
 const MAX_REQUESTS = 5;
 const hits = new Map();
+
+setInterval(() => {
+  const cutoff = Date.now() - WINDOW_MS;
+  for (const [ip, timestamps] of hits) {
+    if (timestamps.at(-1) <= cutoff) hits.delete(ip);
+  }
+}, WINDOW_MS).unref();
 
 function rateLimit(req, res, next) {
   const now = Date.now();
@@ -63,34 +54,13 @@ function rateLimit(req, res, next) {
   next();
 }
 
-/* ---------- Helpers ---------- */
-
-const clean = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
-const escapeHtml = (s) =>
-  s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-
-function validate(body) {
-  const data = {
-    firstName: clean(body.firstName, 80),
-    lastName: clean(body.lastName, 80),
-    phone: clean(body.phone, 40),
-    email: clean(body.email, 160),
-    budget: clean(body.budget, 40),
-    message: clean(body.message, 5000),
-  };
-  const errors = [];
-  if (!data.firstName) errors.push('First name is required.');
-  if (!data.lastName) errors.push('Last name is required.');
-  if (!/^\S+@\S+\.\S+$/.test(data.email)) errors.push('A valid email is required.');
-  if (data.phone && !/^[+\d][\d\s()-]{6,}$/.test(data.phone)) errors.push('Phone number looks invalid.');
-  if (data.message.length < 10) errors.push('Message should be at least 10 characters.');
-  return { data, errors };
-}
-
 /* ---------- Routes ---------- */
 
+const localInboxEnabled = process.env.NODE_ENV !== 'production';
+const mailMode = smtpConfigured ? 'smtp' : localInboxEnabled ? 'file' : 'unavailable';
+
 app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, mail: smtpConfigured ? 'smtp' : 'file' });
+  res.json({ ok: true, mail: mailMode });
 });
 
 app.post('/api/contact', rateLimit, async (req, res) => {
@@ -99,46 +69,24 @@ app.post('/api/contact', rateLimit, async (req, res) => {
   // Honeypot field: real users never fill it in. Pretend success for bots.
   if (body.company) return res.json({ message: "Thanks! I'll be in touch soon." });
 
-  const { data, errors } = validate(body);
+  const { data, errors } = validateContact(body);
   if (errors.length) return res.status(400).json({ error: errors[0], errors });
 
-  const entry = { ...data, receivedAt: new Date().toISOString() };
+  if (mailMode === 'unavailable') {
+    return res.status(503).json({ error: 'Contact delivery is unavailable right now. Please try WhatsApp instead.' });
+  }
 
   try {
-    if (transporter) {
-      const fullName = `${data.firstName} ${data.lastName}`;
-      const fromEmail = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER;
-      const toEmail = process.env.CONTACT_TO || process.env.CONTACT_TO_EMAIL || process.env.SMTP_USER;
-      const rows = [
-        ['Name', fullName],
-        ['Email', data.email],
-        ['Phone', data.phone || '—'],
-        ['Budget', data.budget || '—'],
-      ];
-      await transporter.sendMail({
-        from: `"Portfolio Contact" <${fromEmail}>`,
-        to: toEmail,
-        replyTo: `"${fullName}" <${data.email}>`,
-        subject: `New portfolio enquiry from ${fullName}`,
-        text: `${rows.map(([k, v]) => `${k}: ${v}`).join('\n')}\n\n${data.message}`,
-        html: `
-          <div style="font-family:Arial,sans-serif;color:#080C14">
-            <h2 style="margin:0 0 16px;color:#0D51EF">New portfolio enquiry</h2>
-            <table cellpadding="6" style="border-collapse:collapse">
-              ${rows.map(([k, v]) => `<tr><td style="color:#647084">${k}</td><td><strong>${escapeHtml(v)}</strong></td></tr>`).join('')}
-            </table>
-            <p style="white-space:pre-wrap;line-height:1.6;margin-top:20px">${escapeHtml(data.message)}</p>
-          </div>`,
-      });
+    if (smtpConfigured) {
+      await sendContact(data);
     } else {
-      // No SMTP configured: keep the message on disk so nothing is lost.
+      const entry = { ...data, receivedAt: new Date().toISOString() };
       await mkdir(path.dirname(INBOX_FILE), { recursive: true });
       await appendFile(INBOX_FILE, `${JSON.stringify(entry)}\n`);
-      console.log(`[contact] Saved message from ${data.email} to data/messages.jsonl`);
     }
-    res.json({ message: "Thanks! Your message is on its way. I'll get back to you soon." });
+    res.json({ message: smtpConfigured ? "Thanks! Your message is on its way." : 'Your message was saved to the local inbox.' });
   } catch (err) {
-    console.error('[contact] Failed to deliver message:', err);
+    console.error('[contact] Failed to deliver message:', err.code || err.name);
     res.status(500).json({ error: 'Your message could not be sent right now. Please try WhatsApp instead.' });
   }
 });
@@ -156,5 +104,5 @@ if (existsSync(FRONTEND_DIST)) {
 }
 
 app.listen(PORT, () => {
-  console.log(`API listening on http://localhost:${PORT} (mail: ${smtpConfigured ? 'SMTP' : 'file fallback'})`);
+  console.log(`API listening on http://localhost:${PORT} (mail: ${mailMode})`);
 });
