@@ -12,7 +12,7 @@ export default function PageHeader({ eyebrow, title, children }) {
           {eyebrow}
         </Reveal>
       )}
-      <Reveal as="h1" delay={60} className="font-display text-[44.8px] font-bold leading-[1.13] tracking-tight md:text-[59.2px] md:leading-[1.06] lg:text-[88px]">
+      <Reveal as="h1" delay={60} className="studio-inner-title text-[44.8px] font-bold leading-[1.13] tracking-tight md:text-[59.2px] md:leading-[1.06] lg:text-[88px]">
         {title}
       </Reveal>
       {children && (
