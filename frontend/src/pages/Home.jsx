@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
 import WritingList from '../components/WritingList.jsx';
 import BrandLogo from '../components/BrandLogo.jsx';
-import { projects, stats } from '../data/site.js';
+import { githubProjects, profile, projects, stats } from '../data/site.js';
 import { writings } from '../data/writings.js';
 
 export default function Home() {
@@ -66,6 +66,22 @@ export default function Home() {
               </div>
             </Link>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="shell py-[60px]" aria-labelledby="github-projects">
+        <div className="flex flex-wrap items-baseline justify-between gap-4">
+          <h2 id="github-projects" className="font-display text-[25.6px] font-medium md:text-[30.4px] lg:text-[40px]">
+            More projects on GitHub
+          </h2>
+          <a href={`${profile.github}?tab=repositories`} target="_blank" rel="noopener noreferrer" className="link-underline font-sans text-lg text-ink-soft hover:text-accent">
+            View all repositories ↗
+          </a>
+        </div>
+        <div className="mt-10 grid gap-x-12 gap-y-20 md:grid-cols-2">
+          {githubProjects.map((project, i) => (
+            <ProjectCard key={project.slug} project={project} index={i} />
+          ))}
         </div>
       </section>
 

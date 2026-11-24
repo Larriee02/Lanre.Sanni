@@ -6,6 +6,7 @@ export const profile = {
   name: 'Lanre Sanni',
   role: 'Full Stack Developer',
   location: 'Lagos, Nigeria',
+  github: 'https://github.com/Larriee02',
   cv: '/Lanre.Sanni.pdf',
   email: 'lanresanni0@gmail.com',
   phoneDisplay: '+234 803 512 0129',
@@ -19,7 +20,7 @@ export const socials = [
     label: 'Instagram',
     href: 'https://www.instagram.com/lanre.sanni_?igsh=NDBxNHZndHNzazdp&utm_source=qr',
   },
-  { label: 'GitHub', href: 'https://github.com/Larriee02' },
+  { label: 'GitHub', href: profile.github },
 ];
 
 export const navLinks = [
@@ -63,6 +64,25 @@ export const projects = [
     mobileImage: '/images/spa-mobile.png',
     href: 'https://larriee02.github.io/Extreme-flow2/',
     tags: ['E-commerce', 'Spa services', 'Wellness'],
+  },
+];
+
+export const githubProjects = [
+  {
+    slug: 'marketos',
+    name: 'MarketOS',
+    summary: 'A retail inventory and point-of-sale app that helps shopkeepers track stock, record sales, and see their cash balance and profit.',
+    desktopImage: '/images/marketos-desktop.webp',
+    mobileImage: '/images/marketos-mobile.webp',
+    repository: `${profile.github}/marketOS`,
+  },
+  {
+    slug: 'nexapay',
+    name: 'NexaPay',
+    summary: 'A demo wallet for sending transfers and tracking transactions, built with React, Express, and PostgreSQL.',
+    desktopImage: '/images/nexapay-desktop.webp',
+    mobileImage: '/images/nexapay-mobile.webp',
+    repository: `${profile.github}/nexapay`,
   },
 ];
 

@@ -19,10 +19,10 @@ export default function ProjectCard({ project, index = 0 }) {
 
   return (
     <a
-      href={project.href}
+      href={project.repository || project.href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Open ${project.name} live site`}
+      aria-label={`Open ${project.name} ${project.repository ? 'GitHub repository' : 'live site'}`}
       className="group block"
     >
       <Reveal delay={(index % 2) * 80}>
